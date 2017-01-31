@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "338996212883",
+    "firebase_url": "https://awstest-fd9ff.firebaseio.com",
+    "project_id": "awstest-fd9ff",
+    "storage_bucket": "awstest-fd9ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338996212883:android:743160661f93e006",
+        "android_client_info": {
+          "package_name": "com.example.hugnkiss.first"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338996212883-egaio10qjkro3869ts2suqekc8efrgs3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuDrPdGoi_6iUOwO_MATUvfnJANPHOQTE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
