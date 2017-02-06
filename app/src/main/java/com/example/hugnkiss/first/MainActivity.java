@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.R.attr.data;
@@ -148,28 +149,11 @@ public class MainActivity extends AppCompatActivity {
     protected  void pushDBdata() {
         DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("orders");
 
-        orderRef.child("2017/01").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.e("hug", "onChildAdded: " + dataSnapshot.toString());
-                //Order order = dataSnapshot.getValue(Order.class);
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-            });
-
+        final HashMap<String, String> map1 = new HashMap<>();
+        map1.put("restaurantKey", "01010010001");
+        map1.put("vendorKey", "01012341001");
         /*
-        orderRef.child("2017/01/27").push().setValue("star")
+        orderRef.child("2017/02/03").push().setValue(map1)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -180,7 +164,84 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+        */
 
+        orderRef.child("2017/02").orderByKey().endAt("03").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.e("hug", "0: " + dataSnapshot.toString());
+                /*dataSnapshot.getRef().orderByChild("vendorKey").equalTo(mUID).addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        Log.e("hug", "1: " + dataSnapshot.getRef().getParent().toString() + " / " + dataSnapshot.child("restaurantKey").getValue());
+                    }
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });*/
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+        /*
+        orderRef.child("2017/02/").addValueEventListener(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         dataSnapshot.getRef().orderByChild("vendorKey").addChildEventListener(new ChildEventListener() {
+                             @Override
+                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                 Log.e("hug", "1: " + dataSnapshot.toString());
+                                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                                     Log.e("hug", "1: " + snapshot.child("restaurantKey").getValue());
+                             }
+                             @Override
+                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                             @Override
+                             public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                             @Override
+                             public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                             @Override
+                             public void onCancelled(DatabaseError databaseError) {}
+                         });
+                     }
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+
+                     }
+                    });
+        */
+        orderRef.child("2017/02/02").orderByChild("vendorKey").equalTo(mUID).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                Log.e("hug", "2: " + dataSnapshot.getValue() + " / " + dataSnapshot.child("restaurantKey").getValue());
+                //for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                //    Log.e("hug", "2-1: " + snapshot.child("restaurantKey").getValue());
+                //Order order = dataSnapshot.getValue(Order.class);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+
+        /*
         // db에 mUID가 없어도 ref 값이 null이 아님.
         Log.w("hug", "vendRef: " + FirebaseDatabase.getInstance().getReference("vendors/"+mUID).toString());
         DatabaseReference vendRef = FirebaseDatabase.getInstance().getReference("vendors");
